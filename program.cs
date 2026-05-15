@@ -21,6 +21,19 @@ namespace Consoletask4
 
 
         }
+        public void ReturnBook(string title)
+        {
+            foreach (Book book in boks)
+            {
+                if (book.Title == title)
+                {
+                    book.Availbl=true;
+                    return;
+                }
+
+
+            } 
+        }
         public Book Searchbok(string title)
         {
             foreach (Book book in boks) {
@@ -66,7 +79,7 @@ namespace Consoletask4
 
 
                 while (true) {
-                    Console.WriteLine("a.add s.show b.brow .search");
+                    Console.WriteLine("a.add s.show b.brow .search .return");
                     string mas = Console.ReadLine();
                     if (mas == "a")
                     {
@@ -85,23 +98,30 @@ namespace Consoletask4
                     {
                         lii.cotanrBook();
                     }
-
+                    else if (mas =="return"){
+                        Console.WriteLine("title");
+                        string title = Console.ReadLine();
+                        lii.ReturnBook(title);
+                    }
                     else if (mas == "search")
                     {
-                        Console.WriteLine("nmae book?");
+                        Console.WriteLine("title book");
                         string title = Console.ReadLine();
 
                         Book result = lii.Searchbok(title);
 
-                        if (result != null) {
-                            Console.WriteLine("name book"+result.Title);
-                            Console.WriteLine("author"+result.Author);
+                        if (result != null)
+                        {
+                            Console.WriteLine("title" + result.Title);
+                            Console.WriteLine("author" + result.Author);
 
                         }
                         else
                         {
                             Console.WriteLine("not found");
                         }
+
+                    }
 
 
 
@@ -111,18 +131,18 @@ namespace Consoletask4
 
 
                     else if (mas == "b")
-                        {
-                            Console.WriteLine("enetr isb: ");
-                            string iaa = Console.ReadLine();
-                            lii.BorrowBok(iaa);
+                    {
+                        Console.WriteLine("enetr isb: ");
+                        string iaa = Console.ReadLine();
+                        lii.BorrowBok(iaa);
 
-                        }
-                        else if (mas == "e")
-                        {
-                            Console.WriteLine("exite");
-                            break;
+                    }
+                    else if (mas == "e")
+                    {
+                        Console.WriteLine("exite");
+                        break;
 
-                        }
+                    }
 
 
 
@@ -130,4 +150,7 @@ namespace Consoletask4
         }
 
     }
-}
+
+
+
+
