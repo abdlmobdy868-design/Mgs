@@ -1,3 +1,4 @@
+
 namespace Consoletask4
 {
 
@@ -6,30 +7,41 @@ namespace Consoletask4
         public string Title;
         public string Author;
         public string IsBn;
-        public bool Availbl=true;
+        public bool Availbl = true;
 
     }
 
     class library
     {
         public List<Book> boks = new List<Book>();
-            public void addBok(Book bokss)
+        public void addBok(Book bokss)
         {
             boks.Add(bokss);
             Console.WriteLine("add");
 
 
         }
-        public void ShowBok() {
+        public Book Searchbok(string title)
+        {
+            foreach (Book book in boks) {
+
+                if (book.Title == title)
+                {
+                    return book;
+                }
+            }
+            return null;
+        }
+        public void cotanrBook() {
 
             for (int i = 0; i < boks.Count; i++)
             {
-                Console.WriteLine(boks[i].Title + '-' + boks[i].Author + boks[i].IsBn + '-' +( boks[i].Availbl));
+                Console.WriteLine(boks[i].Title + '-' + boks[i].Author + boks[i].IsBn + '-' + (boks[i].Availbl));
             }
-    }
+        }
         public void BorrowBok(string isbn)
         {
-            for (int i = 0;i < boks.Count; i++)
+            for (int i = 0; i < boks.Count; i++)
             {
                 if (boks[i].IsBn == isbn)
                 {
@@ -44,10 +56,17 @@ namespace Consoletask4
         {
             static void Main(string[] args)
             {
+
+
+
+
+
+
                 library lii = new library();
 
+
                 while (true) {
-                    Console.WriteLine("a.add s.show b.brow e.exit");
+                    Console.WriteLine("a.add s.show b.brow .search");
                     string mas = Console.ReadLine();
                     if (mas == "a")
                     {
@@ -64,28 +83,51 @@ namespace Consoletask4
                     }
                     else if (mas == "s")
                     {
-                        lii.ShowBok();
-
+                        lii.cotanrBook();
                     }
 
-                    
-                    
-                       else if (mas == "b")
+                    else if (mas == "search")
                     {
-                        Console.WriteLine("enetr isb: ");
-                        string iaa = Console.ReadLine();
-                        lii.BorrowBok(iaa);
+                        Console.WriteLine("nmae book?");
+                        string title = Console.ReadLine();
 
-                    }
-                    else if (mas == "e") {
-                        Console.WriteLine("exite");
-                        break;
+                        Book result = lii.Searchbok(title);
 
-                    }
+                        if (result != null) {
+                            Console.WriteLine("name book"+result.Title);
+                            Console.WriteLine("author"+result.Author);
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("not found");
+                        }
 
 
 
-                } } }
+
+
+
+
+
+                    else if (mas == "b")
+                        {
+                            Console.WriteLine("enetr isb: ");
+                            string iaa = Console.ReadLine();
+                            lii.BorrowBok(iaa);
+
+                        }
+                        else if (mas == "e")
+                        {
+                            Console.WriteLine("exite");
+                            break;
+
+                        }
+
+
+
+                    } } }
         }
-    }
 
+    }
+}
